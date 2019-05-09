@@ -3,6 +3,8 @@ import { Form, Icon, Input, Button, Row, Col } from 'antd';
 import { ListDiv } from '../style';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Api from "Utils/apiHandler.js";
+const api = new Api();
 
 const LogoImage = styled.img`
     border-radius: 50%;
@@ -19,13 +21,24 @@ class Login extends Component {
     constructor() {
         super();
         this.state = {
-
+            //initialize state variables
         }
+    }
+
+    _submitLogin = () => {
+        api.get('/your-api-url')
+            .then(response => {
+                if (response.status === 200) {
+                    //execution after response
+                }
+            }).catch((err) => {
+                //handle error
+            })
     }
 
     _handleLogin(e) {
         e.preventDefault();
-        console.log('>>>>>>')
+        this._submitLogin(); //submit api call
     }
 
     render() {
@@ -69,6 +82,5 @@ class Login extends Component {
         );
     }
 };
-
 
 export default Login;

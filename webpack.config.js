@@ -19,7 +19,8 @@ module.exports = {
       Src: path.resolve(__dirname, './src'),
       Common: path.resolve(__dirname, './src/common'),
       Components: path.resolve(__dirname, './src/components'),
-      Assets: path.resolve(__dirname, './src/assets')
+      Assets: path.resolve(__dirname, './src/assets'),
+      Utils: path.resolve(__dirname, './src/util')
     },
     extensions: ['.js', '.jsx', '.css']
   },
