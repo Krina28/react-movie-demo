@@ -4,6 +4,9 @@ import { ListDiv } from '../style';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Api from "Utils/apiHandler.js";
+import ACTIONS from "../../redux/actions";
+import { connect } from "react-redux";
+
 const api = new Api();
 
 const LogoImage = styled.img`
@@ -18,25 +21,34 @@ const LoginForm = styled(Form)`
 `
 
 class Login extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            isLogin: false
             //initialize state variables
         }
     }
 
     _submitLogin = () => {
-        api.get('/your-api-url')
+        //form data to send
+        let data = {
+            name: 'test'
+        }
+        //api - call
+        api.post('/your-api-url', data)
             .then(response => {
                 if (response.status === 200) {
                     //execution after response
+                    //dispatching function with data to store in redux
+                    this.props.login(data);
+                    this.setState({ isLogin: true })
                 }
             }).catch((err) => {
                 //handle error
             })
     }
 
-    _handleLogin(e) {
+    _handleLogin = (e) => {
         e.preventDefault();
         this._submitLogin(); //submit api call
     }
@@ -83,4 +95,16 @@ class Login extends Component {
     }
 };
 
-export default Login;
+const mapStateToProps = state => ({
+    data: state
+});
+
+const mapDispatchToProps = dispatch => ({
+    login: data => dispatch(ACTIONS.login(data)),
+    logout: id => dispatch(ACTIONS.logout(id))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)((Login));
