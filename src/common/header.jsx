@@ -32,7 +32,7 @@ class Header extends Component {
   render() {
     return (
       <HeaderDiv>
-        <Link to="/"><AppLogo class="logo">CompanyLogo</AppLogo></Link>
+        <Link to="/"><AppLogo className="logo">CompanyLogo</AppLogo></Link>
         <RightMenu>
           <Link to="/">Home</Link>
           <Link to="/login">Login</Link>
